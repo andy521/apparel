@@ -2,43 +2,63 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
+
     <data>
+
         <variable
             name="user"
-            type="com.yhao.bean.User"/>
+            type="com.yhao.viewModel.User"/>
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@={user.name}"
-            android:textSize="17sp"/>
 
         <EditText
-            android:id="@+id/sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@={user.sex}"
+            android:layout_margin="10dp"
+            android:hint="username"
+            android:text="@={user.username}"
+            android:textSize="17sp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="password"
+            android:text="@={user.password}"
             android:textSize="17sp"
             />
 
         <Button
-            android:id="@+id/changeName"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sex"
-            android:layout_marginTop="10dp"
-            android:text="change name"/>
+            android:layout_margin="10dp"
+            android:text="login"/>
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:text="@{user.name}"
+            android:textSize="17sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:text="@{user.sex}"
+            android:textSize="17sp"/>
+
+
+    </LinearLayout>
 
 </layout>

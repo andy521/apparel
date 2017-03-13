@@ -24,9 +24,6 @@
         app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="#8a8a8a"
-        app:tabTextColor="#dbdbdb"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabPaddingStart="5dp"
         app:tabPaddingEnd="5dp"
         />

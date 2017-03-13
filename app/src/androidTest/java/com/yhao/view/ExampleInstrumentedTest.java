@@ -1,4 +1,4 @@
-package com.yhao.apparel;
+package com.yhao.view;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

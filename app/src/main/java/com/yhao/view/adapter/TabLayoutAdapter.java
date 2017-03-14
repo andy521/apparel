@@ -28,7 +28,8 @@ public class TabLayoutAdapter {
     private static final List<TabLayoutItem> mLayoutItemList = new ArrayList<>();
 
     static {
-        for (int i = 0; i < pagerTitle.length; i++) {
+        mLayoutItemList.add(new TabLayoutItem(pagerTitle[0], pImageResId[0], pTextColor));
+        for (int i = 1; i < pagerTitle.length; i++) {
             mLayoutItemList.add(i, new TabLayoutItem(pagerTitle[i], imageResId[i], textColor));
         }
     }
@@ -63,7 +64,6 @@ public class TabLayoutAdapter {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
     }

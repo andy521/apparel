@@ -27,5 +27,14 @@ public class MyViewPager extends ViewPager {
         return this.isPagingEnabled && super.onTouchEvent(event);
     }
 
+    @Override
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        super.setCurrentItem(item, false);
+    }
+
+    @Override
+    public void setCurrentItem(int item) {
+        super.setCurrentItem(item, false);//表示切换的时候，不需要切换时间。
+    }
 
 }

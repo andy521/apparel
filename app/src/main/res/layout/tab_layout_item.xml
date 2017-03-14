@@ -31,9 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="@{tabLayoutItem.text}"
             android:textColor="@{tabLayoutItem.textColor}"
-            android:textSize="12sp"
-            android:text="@{tabLayoutItem.text}"/>
+            android:textSize="12sp"/>
 
     </LinearLayout>
 </layout>

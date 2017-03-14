@@ -1,10 +1,8 @@
 package com.yhao.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.yhao.view.adapter.TabLayoutAdapter;
 import com.yhao.view.adapter.ViewPagerAdapter;
@@ -20,7 +18,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initView();
-
     }
 
     private void initView() {
@@ -30,7 +27,5 @@ public class HomeActivity extends AppCompatActivity {
         mViewPager.setAdapter(viewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         TabLayoutAdapter.init(this,mTabLayout);
-        new TextView(this).setTextColor(Color.WHITE);
-
     }
 }

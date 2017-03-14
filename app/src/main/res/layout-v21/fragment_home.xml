@@ -9,21 +9,13 @@
     <com.yhao.view.widgt.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:elevation="1dp"
+        android:layout_height="35dp"
         app:leftImg="@mipmap/more"
         app:rightImg="@mipmap/search"
         app:title="首页"
         app:titleTextColor="#515151"
         app:titleTextSize="8sp"
         />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/down_shadow"
-        android:alpha="100"
-       />
 
 
 </LinearLayout>

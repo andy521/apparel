@@ -1,15 +1,18 @@
 package com.yhao.model;
 
 import com.yhao.model.API.HomeLoopAPI;
+import com.yhao.model.bean.LoopViewInfo;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.viewModel.LoopViewItem;
+
+import org.reactivestreams.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observer;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -19,36 +22,40 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeLoopDAO {
     public List<LoopViewItem> mLoopViewItemList;
+    public LoopViewItem mCurrentLoopViewItem;
 
-    public HomeLoopDAO() {
+    public HomeLoopDAO(int size) {
+        mCurrentLoopViewItem = new LoopViewItem();
+        mCurrentLoopViewItem.setIndex(0);
         mLoopViewItemList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            LoopViewItem item = new LoopViewItem();
+            mLoopViewItemList.add(item);
+        }
     }
 
-    public void getHomeLoopDAO() {
+    public void loadHomeLoopInfo() {
         HomeLoopAPI homeLoopAPI = RetrofitUtil.getRetrofit().create(HomeLoopAPI.class);
         homeLoopAPI.getLoopViewInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<LoopViewItem>>() {
+                .flatMap(new Function<LoopViewInfo, Publisher<LoopViewItem>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    public Publisher<LoopViewItem> apply(LoopViewInfo loopViewInfo) throws Exception {
+                        return Flowable.fromIterable(loopViewInfo.getResults());
                     }
-
-                    @Override
-                    public void onNext(List<LoopViewItem> value) {
-                        mLoopViewItemList.addAll(value);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                })
+                .subscribe(item -> {
+                    int index = item.getIndex();
+                    mLoopViewItemList.get(index).setImgUrl(item.getImgUrl());
+                    mLoopViewItemList.get(index).setIndex(item.getIndex());
+                    mLoopViewItemList.get(index).setInfo(item.getInfo());
+                    if (index == 0) {
+                        mCurrentLoopViewItem.setIndex(item.getIndex());
+                        mCurrentLoopViewItem.setInfo(item.getInfo());
                     }
                 });
+
+
     }
 }

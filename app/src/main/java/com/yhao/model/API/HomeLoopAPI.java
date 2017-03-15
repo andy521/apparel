@@ -1,9 +1,11 @@
 package com.yhao.model.API;
 
+import com.yhao.model.bean.LoopViewInfo;
 import com.yhao.viewModel.LoopViewItem;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
@@ -14,6 +16,6 @@ import retrofit2.http.GET;
 
 public interface HomeLoopAPI {
     @GET("classes/HomeLoopInfo")
-    Observable<List<LoopViewItem>> getLoopViewInfo();
+    Flowable<LoopViewInfo> getLoopViewInfo();
 
 }

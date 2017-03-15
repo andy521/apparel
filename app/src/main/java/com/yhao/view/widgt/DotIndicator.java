@@ -23,6 +23,9 @@ public class DotIndicator extends LinearLayout {
 
     private Context mContext;
 
+    ImageView mImageView;
+    LayoutParams mLayoutParams;
+
     public DotIndicator(Context context) {
         this(context, null);
     }
@@ -35,22 +38,31 @@ public class DotIndicator extends LinearLayout {
         ta.recycle();
         mContext = context;
         initView();
+        refreshCurrent();
+    }
+
+    public void setCurrent(int current) {
+        this.mCurrent = current;
+        this.removeAllViews();
+        refreshCurrent();
+    }
+
+    private void refreshCurrent() {
+        for (int i = 0; i < mSum; i++) {
+            mImageView = new ImageView(mContext);
+            if (i == mCurrent) {
+                mImageView.setImageDrawable(getResources().getDrawable(R.drawable.current_dot));
+            } else {
+                mImageView.setImageDrawable(getResources().getDrawable(R.drawable.white_dot));
+            }
+            addView(mImageView, mLayoutParams);
+        }
     }
 
     private void initView() {
         setOrientation(LinearLayout.HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
-        ImageView imageView;
-        LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(5, 0, 5, 0);
-        for (int i = 0; i < mSum; i++) {
-            imageView = new ImageView(mContext);
-            if (i == mCurrent) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.current_dot));
-            } else {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.white_dot));
-            }
-            addView(imageView,layoutParams);
-        }
+        mLayoutParams= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mLayoutParams.setMargins(5, 0, 5, 0);
     }
 }

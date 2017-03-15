@@ -7,4 +7,9 @@
         <attr name="titleTextColor" format="color"/>
         <attr name="rightImg" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="DotIndicator">
+        <attr name="dotSum" format="integer"/>
+        <attr name="current" format="integer"/>
+    </declare-styleable>
 </resources>

@@ -28,6 +28,11 @@ public class MyViewPager extends ViewPager {
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return this.isPagingEnabled && super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
     public void setCurrentItem(int item, boolean smoothScroll) {
         super.setCurrentItem(item, false);
     }

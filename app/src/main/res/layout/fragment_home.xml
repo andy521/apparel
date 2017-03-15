@@ -10,20 +10,18 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:elevation="1dp"
         app:leftImg="@mipmap/more"
         app:rightImg="@mipmap/search"
         app:title="首页"
-        app:titleTextColor="#515151"
+        app:titleTextColor="#707070"
         app:titleTextSize="8sp"
         />
 
-    <ImageView
+    <com.yhao.view.widgt.LoopViewPager
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/down_shadow"
-        android:alpha="100"
-       />
+        android:layout_height="180dp"
+        android:background="#556"
+        />
 
 
 </LinearLayout>

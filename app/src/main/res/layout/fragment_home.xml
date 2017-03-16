@@ -1,40 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/colorBack"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    >
 
     <com.yhao.view.widgt.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@color/colorWhite"
         app:leftImg="@mipmap/more"
         app:rightImg="@mipmap/search"
         app:title="首页"
         app:titleTextColor="@color/colorDotCurrent"
         app:titleTextSize="8sp"
-        android:background="@color/colorWhite"
         />
 
-    <com.yhao.view.widgt.LoopViewPager
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        />
-
-    <GridView
-        android:id="@+id/fastMenuGridView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:numColumns="4"
-        android:background="@color/colorWhite"
-        />
+        android:layout_height="wrap_content">
 
 
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBack"
+            android:orientation="vertical">
 
 
+            <com.yhao.view.widgt.LoopViewPager
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                />
+
+            <GridView
+                android:id="@+id/fastMenuGridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:numColumns="4"
+                android:padding="10dp"
+                />
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardRecommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardTops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardBottoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardShose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardBags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
 
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

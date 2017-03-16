@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,21 +11,28 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
+                  android:background="@color/colorWhite"
                   android:orientation="vertical">
 
         <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/colorDotCurrent"
             android:text="@{homeCardInfo.theme}"/>
 
         <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:scaleType="fitXY"
-            android:src="@{homeCardInfo.bigImgUrl}"
+            app:imgUrl="@{homeCardInfo.bigImgUrl}"
             />
 
         <GridView
+            android:id="@+id/gridView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
-import com.yhao.model.HomeLoopDAO;
+import com.yhao.model.dao.HomeLoopDAO;
 import com.yhao.view.R;
 import com.yhao.view.adapter.LoopViewAdapter;
 import com.yhao.view.databinding.LoopViewPagerBinding;

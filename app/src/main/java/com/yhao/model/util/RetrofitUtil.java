@@ -21,25 +21,26 @@ public class RetrofitUtil {
 
     }
 
-    public static synchronized Retrofit getRetrofit() {
-        if (mRetrofit == null) {
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(chain -> {
-                        Request newRequest = chain.request().newBuilder()
-                                .addHeader("X-Bmob-Application-Id", Constant.BMOB_APP_ID)
-                                .addHeader("X-Bmob-REST-API-Key", Constant.BMOB_API_KEY)
-                                .build();
-                        return chain.proceed(newRequest);
-                    })
-                    .build();
-            mRetrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.bmob.cn/1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(client)
-                    .build();
-        }
+    public static Retrofit getRetrofit() {
         return mRetrofit;
+    }
+
+    public static void initRetrofit() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    Request newRequest = chain.request().newBuilder()
+                            .addHeader("X-Bmob-Application-Id", Constant.BMOB_APP_ID)
+                            .addHeader("X-Bmob-REST-API-Key", Constant.BMOB_API_KEY)
+                            .build();
+                    return chain.proceed(newRequest);
+                })
+                .build();
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl("https://api.bmob.cn/1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .build();
     }
 
 }

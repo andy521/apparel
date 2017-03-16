@@ -1,4 +1,4 @@
-package com.yhao.model;
+package com.yhao.model.dao;
 
 import com.yhao.model.API.HomeLoopAPI;
 import com.yhao.model.bean.LoopViewInfo;

@@ -18,6 +18,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by yinghao on 2017/3/15.
  * Email：756232212@qq.com
+ *
+ *        1.提供数据源
+ *        2.更新数据
  */
 
 public class HomeLoopDAO {

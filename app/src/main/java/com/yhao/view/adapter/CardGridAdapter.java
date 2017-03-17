@@ -1,11 +1,21 @@
 package com.yhao.view.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.yhao.model.dao.WaresItemDAO;
+import com.yhao.view.R;
+import com.yhao.view.databinding.FastMenuItemBinding;
+import com.yhao.view.databinding.WaresGridItemBinding;
 import com.yhao.viewModel.HomeCardInfo;
+import com.yhao.viewModel.WaresItem;
 
 import java.util.List;
 
@@ -15,29 +25,34 @@ import java.util.List;
 
 public class CardGridAdapter extends BaseAdapter {
 
-    private List<String> mWaresId;
+    private List<WaresItem> mWaresItemList;
+    private Context mContext;
 
-    public CardGridAdapter(Context context, List<String> waresId) {
-        mWaresId = waresId;
+
+    public CardGridAdapter(Context context,List<WaresItem> waresItemList) {
+        mContext = context;
+        mWaresItemList = waresItemList;
     }
 
     @Override
     public int getCount() {
-        return mWaresId.size();
+        return mWaresItemList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mWaresItemList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        WaresGridItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.wares_grid_item, null, false);
+        binding.setWaresItem(mWaresItemList.get(position));
+        return binding.getRoot();
     }
 }

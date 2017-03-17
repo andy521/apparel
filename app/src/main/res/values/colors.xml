@@ -8,4 +8,5 @@
     <color name="colorDotCurrent">#d62d2d2d</color>
     <color name="colorDot">#d6ffffff</color>
     <color name="colorBack">#dbdbdb</color>
+    <color name="colorBlack">#0a0a0a</color>
 </resources>

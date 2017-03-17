@@ -15,27 +15,55 @@
                   android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/colorDotCurrent"
-            android:text="@{homeCardInfo.theme}"/>
-
-        <ImageView
             android:layout_marginTop="10dp"
+            android:text="@{homeCardInfo.theme}"
+            android:textColor="@color/colorDotCurrent"
+            android:textSize="12sp"/>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
-            app:imgUrl="@{homeCardInfo.bigImgUrl}"
-            />
+            android:layout_height="190dp"
+            android:layout_marginTop="10dp"
+            >
 
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:scaleType="fitXY"
+                app:imgUrl="@{homeCardInfo.bigImgUrl}"
+                />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@drawable/triangle"
+                android:scaleType="fitXY"
+                />
+        </FrameLayout>
+
+        <com.yhao.view.widgt.BounceHorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:scrollbars="none">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.yhao.view.widgt.MyGridView
+                    android:id="@+id/gridView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="10dp"
+                    android:padding="10dp"
+                    app:waresId="@{homeCardInfo.waresId}"
+                    />
+            </LinearLayout>
+        </com.yhao.view.widgt.BounceHorizontalScrollView>
     </LinearLayout>
 </layout>

@@ -1,12 +1,16 @@
 package com.yhao.view.fragment;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.GridView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.yhao.model.dao.HomeCardDAO;
@@ -25,6 +29,16 @@ public class HomeFragment extends Fragment {
     private HomeCardView mCardShose;
     private HomeCardView mCardBags;
 
+    private boolean setRecommendDataFlag = true;
+    private boolean setTopsDataFlag = true;
+    private boolean setBottomsDataFlag = true;
+    private boolean setShoseDataFlag = true;
+    private boolean setBagsDataFlag = true;
+
+    private ScrollView mScrollView;
+
+    private HomeCardDAO mHomeCardDAO;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +51,9 @@ public class HomeFragment extends Fragment {
         mCardBottoms = (HomeCardView) view.findViewById(R.id.cardBottoms);
         mCardShose = (HomeCardView) view.findViewById(R.id.cardShose);
         mCardBags = (HomeCardView) view.findViewById(R.id.cardBags);
+
+        mScrollView = (ScrollView) view.findViewById(R.id.scrollView);
+
         return view;
     }
 
@@ -49,25 +66,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initCardData() {
-        HomeCardDAO dao = new HomeCardDAO();
-        for (int i = 0; i < dao.mHomeCardInfoList.size(); i++) {
-            if (TextUtils.equals(dao.mHomeCardInfoList.get(i).getTheme(), HomeCardDAO.themes[0])) {
-                mCardRecommend.setData(dao.mHomeCardInfoList.get(i));
-            }
-            if (TextUtils.equals(dao.mHomeCardInfoList.get(i).getTheme(), HomeCardDAO.themes[1])) {
-                mCardTops.setData(dao.mHomeCardInfoList.get(i));
-            }
-            if (TextUtils.equals(dao.mHomeCardInfoList.get(i).getTheme(), HomeCardDAO.themes[2])) {
-                mCardBottoms.setData(dao.mHomeCardInfoList.get(i));
-            }
-            if (TextUtils.equals(dao.mHomeCardInfoList.get(i).getTheme(), HomeCardDAO.themes[3])) {
-                mCardShose.setData(dao.mHomeCardInfoList.get(i));
-            }
-            if (TextUtils.equals(dao.mHomeCardInfoList.get(i).getTheme(), HomeCardDAO.themes[4])) {
-                mCardBags.setData(dao.mHomeCardInfoList.get(i));
-            }
-        }
-        dao.loadHomeCardInfo();
+        mHomeCardDAO = new HomeCardDAO();
+        mHomeCardDAO.loadHomeCardInfo();
     }
 
     private void initView() {
@@ -88,6 +88,30 @@ public class HomeFragment extends Fragment {
             }
         });
         mFastMenuGridView.setOnItemClickListener((parent, views, position, id) -> Toast.makeText(getContext(), "pos=" + position, Toast.LENGTH_SHORT).show());
+
+        mScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            if (setRecommendDataFlag && mCardRecommend.getGlobalVisibleRect(new Rect())) {
+                mCardRecommend.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[0]));
+                setRecommendDataFlag = false;
+            }
+            if (setTopsDataFlag && mCardTops.getGlobalVisibleRect(new Rect())) {
+                mCardTops.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[1]));
+                setTopsDataFlag = false;
+            }
+            if (setBottomsDataFlag && mCardBottoms.getGlobalVisibleRect(new Rect())) {
+                mCardBottoms.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[2]));
+                setBottomsDataFlag = false;
+            }
+            if (setShoseDataFlag && mCardShose.getGlobalVisibleRect(new Rect())) {
+                mCardShose.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[3]));
+                setShoseDataFlag = false;
+            }
+            if (setBagsDataFlag && mCardBags.getGlobalVisibleRect(new Rect())) {
+                mCardBags.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[4]));
+                setBagsDataFlag = false;
+            }
+        });
+
     }
 
 

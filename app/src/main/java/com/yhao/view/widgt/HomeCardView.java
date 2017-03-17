@@ -2,16 +2,13 @@ package com.yhao.view.widgt;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
-import com.yhao.model.dao.HomeCardDAO;
 import com.yhao.view.R;
 import com.yhao.view.adapter.CardGridAdapter;
 import com.yhao.view.databinding.HomeCardViewBinding;
-import com.yhao.view.databinding.LoopViewPagerBinding;
 import com.yhao.viewModel.HomeCardInfo;
 
 /**
@@ -26,6 +23,7 @@ import com.yhao.viewModel.HomeCardInfo;
 public class HomeCardView extends LinearLayout {
     HomeCardViewBinding binding;
     Context mContext;
+
 
     public HomeCardView(Context context) {
         super(context);
@@ -43,8 +41,5 @@ public class HomeCardView extends LinearLayout {
 
     public void setData(HomeCardInfo homeCardInfo) {
         binding.setHomeCardInfo(homeCardInfo);
-        CardGridAdapter adapter = new CardGridAdapter(mContext, homeCardInfo.getWaresId());
-        binding.gridView.setAdapter(adapter);
     }
-
 }

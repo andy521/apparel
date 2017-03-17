@@ -6,10 +6,10 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.yhao.view.BR;
+import com.yhao.view.widgt.MyGridView;
 
 import java.util.List;
-
-import com.yhao.view.BR;
 
 
 /**
@@ -63,12 +63,14 @@ public class HomeCardInfo extends BaseObservable {
         this.content = conten;
     }
 
+    @Bindable
     public List<String> getWaresId() {
         return waresId;
     }
 
     public void setWaresId(List<String> waresId) {
         this.waresId = waresId;
+        notifyPropertyChanged(BR.waresId);
     }
 
     @BindingAdapter("app:imgUrl")
@@ -76,5 +78,12 @@ public class HomeCardInfo extends BaseObservable {
         Glide.with(view.getContext())
                 .load(imgUrl)
                 .into(view);
+    }
+
+    @BindingAdapter("app:waresId")
+    public static void setData(MyGridView view, List<String> waresId) {
+        if (waresId != null) {
+            view.setWaresId(waresId);
+        }
     }
 }

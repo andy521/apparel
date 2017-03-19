@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yhao.model.dao.HomeCardDAO;
@@ -51,6 +52,9 @@ public class HomeFragment extends Fragment {
     private NoScrollGridView mBrandGridView;
     private NoScrollGridView mLikeGridView;
 
+    private TextView mLoadMoreTv;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class HomeFragment extends Fragment {
         mBrandGridView = (NoScrollGridView) view.findViewById(R.id.brandGridView);
         mScrollView = (BounceScrollView) view.findViewById(R.id.scrollView);
         mLikeGridView = (NoScrollGridView) view.findViewById(R.id.likeGridView);
+        mLoadMoreTv = (TextView) view.findViewById(R.id.loadMoreTv);
+
         return view;
     }
 
@@ -84,7 +90,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initLikeWaresData() {
-        mWaresLimitDAO = new WaresLimitDAO(getContext());
+        mWaresLimitDAO = new WaresLimitDAO(getContext(),mLoadMoreTv);
         mLikeGridView.setAdapter(mWaresLimitDAO.mLikeGridAdapter);
     }
 

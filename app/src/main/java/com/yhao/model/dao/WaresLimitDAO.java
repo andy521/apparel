@@ -2,6 +2,7 @@ package com.yhao.model.dao;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.yhao.model.API.WaresItemAPI;
 import com.yhao.model.API.WaresLimitAPI;
@@ -34,7 +35,10 @@ public class WaresLimitDAO {
 
     private boolean loadFlag = true;
 
-    public WaresLimitDAO(Context context) {
+    private TextView mTextView;
+
+    public WaresLimitDAO(Context context, TextView textView) {
+        mTextView = textView;
         mWaresLimitList = new ArrayList<>();
         mLikeGridAdapter = new LikeGridAdapter(context, mWaresLimitList);
         waresLimitAPI = RetrofitUtil.getRetrofit().create(WaresLimitAPI.class);
@@ -44,12 +48,14 @@ public class WaresLimitDAO {
 
     public void loadWaresItem() {
         if (loadFlag) {
+            mTextView.setText("加载中...");
             waresLimitAPI.getWares(limit, skip)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(waresItemInfo -> {
                         if (waresItemInfo.getResults().size() == 0) {
-                            loadFlag=false;
+                            loadFlag = false;
+                            mTextView.setText("没有更多了~");
                             return;
                         }
                         for (WaresItem item : waresItemInfo.getResults()) {
@@ -57,6 +63,7 @@ public class WaresLimitDAO {
                             mWaresLimitList.add(item);
                         }
                         //需要在ui线程
+                        mTextView.setText("");
                         mLikeGridAdapter.notifyDataSetChanged();
                     });
             skip += limit;

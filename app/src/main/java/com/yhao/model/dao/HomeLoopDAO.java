@@ -41,7 +41,7 @@ public class HomeLoopDAO {
         HomeLoopAPI homeLoopAPI = RetrofitUtil.getRetrofit().create(HomeLoopAPI.class);
         homeLoopAPI.getLoopViewInfo()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
                 .flatMap(new Function<LoopViewInfo, Publisher<LoopViewItem>>() {
                     @Override
                     public Publisher<LoopViewItem> apply(LoopViewInfo loopViewInfo) throws Exception {

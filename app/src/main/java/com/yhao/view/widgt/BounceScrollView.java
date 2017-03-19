@@ -1,12 +1,19 @@
 package com.yhao.view.widgt;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.yhao.model.util.DensityUtil;
 
 /**
  * Created by yinghao on 2017/3/17.
@@ -32,6 +39,12 @@ public class BounceScrollView extends ScrollView {
     private float distanceY = 0;
     private boolean upDownSlide = false; //判断上下滑动的flag
 
+
+    //下拉刷新tips
+    private TextView mHeader;
+    private int mHeaderHeight;
+
+
     public BounceScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -44,8 +57,14 @@ public class BounceScrollView extends ScrollView {
     protected void onFinishInflate() {
         if (getChildCount() > 0) {
             inner = getChildAt(0);
-            View view;
         }
+//        mHeader = new TextView(getContext());
+//        mHeader.setText("下拉刷新页面");
+//        mHeader.setTextSize(DensityUtil.dip2px(getContext(), 10));
+//        mHeader.setTextColor(Color.BLACK);
+//        mHeader.setGravity(Gravity.CENTER);
+//        mHeader.setVisibility(GONE);
+//        ((LinearLayout) inner).addView(mHeader, 1);
     }
 
     @Override
@@ -104,7 +123,7 @@ public class BounceScrollView extends ScrollView {
             case MotionEvent.ACTION_UP:
                 // 手指松开.
                 if (isNeedAnimation()) {
-                    animation();
+                    perAnimation();
                     isCount = false;
                 }
                 clear0();
@@ -138,21 +157,44 @@ public class BounceScrollView extends ScrollView {
         }
     }
 
-    /***
+    /**
+     * 回缩动画之前 根据view移出距离做相关处理
+     */
+    public void perAnimation() {
+        if (inner.getTop() > 0) {
+            mOnScrollTopBottomListener.top();
+        } else {
+            mOnScrollTopBottomListener.bottom();
+        }
+        animation();
+    }
+
+
+    /**
      * 回缩动画
      */
     public void animation() {
         // 开启移动动画
-        TranslateAnimation ta = new TranslateAnimation(0, 0, inner.getTop(),
-                normal.top);
+        TranslateAnimation ta = new TranslateAnimation(0, 0, inner.getTop(), normal.top);
         ta.setDuration(200);
         inner.startAnimation(ta);
         // 设置回到正常的布局位置
         inner.layout(normal.left, normal.top, normal.right, normal.bottom);
-
         normal.setEmpty();
-
     }
+
+    public void setOnScrollTopBottomListener(onScrollTopBottomListener onScrollTopBottomListener) {
+        mOnScrollTopBottomListener = onScrollTopBottomListener;
+    }
+
+    private onScrollTopBottomListener mOnScrollTopBottomListener;
+
+    public interface onScrollTopBottomListener {
+        public void top();
+
+        public void bottom();
+    }
+
 
     // 是否需要开启动画
     public boolean isNeedAnimation() {

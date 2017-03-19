@@ -2,47 +2,41 @@ package com.yhao.view.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.yhao.model.dao.WaresItemDAO;
 import com.yhao.view.R;
-import com.yhao.view.databinding.FastMenuItemBinding;
-import com.yhao.view.databinding.WaresGridItemBinding;
 import com.yhao.view.databinding.WaresLikeGridItemBinding;
-import com.yhao.viewModel.HomeCardInfo;
 import com.yhao.viewModel.WaresItem;
 
 import java.util.List;
 
 /**
- * Created by yhao on 2017/3/16.
+ * Created by yhao on 2017/3/18.
  */
 
-public class CardGridAdapter extends BaseAdapter {
-
-    private List<WaresItem> mWaresItemList;
+public class LikeGridAdapter extends BaseAdapter {
     private Context mContext;
 
+    private List<WaresItem> mWaresLimitList;
 
-    public CardGridAdapter(Context context, List<WaresItem> waresItemList) {
+
+    public LikeGridAdapter(Context context, List<WaresItem> waresLimitList) {
         mContext = context;
-        mWaresItemList = waresItemList;
+        mWaresLimitList = waresLimitList;
     }
 
     @Override
     public int getCount() {
-        return mWaresItemList.size();
+        return mWaresLimitList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mWaresItemList.get(position);
+        return mWaresLimitList.get(position);
     }
 
     @Override
@@ -52,13 +46,14 @@ public class CardGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        WaresGridItemBinding binding;
+        WaresLikeGridItemBinding binding;
         if (convertView == null) {
-            binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.wares_grid_item, null, false);
+            binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.wares_like_grid_item, null, false);
         } else {
             binding = DataBindingUtil.getBinding(convertView);
         }
-        binding.setWaresItem(mWaresItemList.get(position));
+        binding.setWaresItem(mWaresLimitList.get(position));
+        binding.getRoot().setBackgroundColor(Color.WHITE);
         return binding.getRoot();
     }
 }

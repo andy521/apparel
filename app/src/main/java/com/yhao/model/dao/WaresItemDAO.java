@@ -1,7 +1,5 @@
 package com.yhao.model.dao;
 
-import android.util.Log;
-
 import com.yhao.model.API.WaresItemAPI;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.viewModel.WaresItem;
@@ -37,12 +35,11 @@ public class WaresItemDAO {
             int finalI = i;
             waresItemAPI.getWares(mWaresId.get(i))
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(Schedulers.io())
                     .subscribe(waresItem -> {
-                        Log.d("TAG", "accept: waresItem= " + waresItem.toString());
                         mWaresItemList.get(finalI).setName(waresItem.getName());
                         mWaresItemList.get(finalI).setMainImgUrl(waresItem.getMainImgUrl());
-                        mWaresItemList.get(finalI).setPrice("￥"+waresItem.getPrice());
+                        mWaresItemList.get(finalI).setPrice("￥" + waresItem.getPrice());
                         mWaresItemList.get(finalI).setBuyUrl(waresItem.getBuyUrl());
                     });
         }

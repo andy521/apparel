@@ -14,12 +14,19 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.yhao.model.dao.HomeCardDAO;
+import com.yhao.model.dao.WaresLimitDAO;
 import com.yhao.view.R;
+import com.yhao.view.adapter.BrandGridAdapter;
 import com.yhao.view.adapter.FastMenuAdapter;
+import com.yhao.view.adapter.LikeGridAdapter;
+import com.yhao.view.adapter.TypeGridAdapter;
+import com.yhao.view.widgt.BounceScrollView;
 import com.yhao.view.widgt.HomeCardView;
+import com.yhao.view.widgt.NoScrollGridView;
 import com.yhao.view.widgt.Topbar;
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "TAG";
     private Topbar mTopbar;
     private GridView mFastMenuGridView;
 
@@ -35,9 +42,14 @@ public class HomeFragment extends Fragment {
     private boolean setShoseDataFlag = true;
     private boolean setBagsDataFlag = true;
 
-    private ScrollView mScrollView;
+    private BounceScrollView mScrollView;
 
     private HomeCardDAO mHomeCardDAO;
+    private WaresLimitDAO mWaresLimitDAO;
+
+    private NoScrollGridView mTypeGridView;
+    private NoScrollGridView mBrandGridView;
+    private NoScrollGridView mLikeGridView;
 
 
     @Override
@@ -45,15 +57,15 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mTopbar = (Topbar) view.findViewById(R.id.topbar);
         mFastMenuGridView = (GridView) view.findViewById(R.id.fastMenuGridView);
-
         mCardRecommend = (HomeCardView) view.findViewById(R.id.cardRecommend);
         mCardTops = (HomeCardView) view.findViewById(R.id.cardTops);
         mCardBottoms = (HomeCardView) view.findViewById(R.id.cardBottoms);
         mCardShose = (HomeCardView) view.findViewById(R.id.cardShose);
         mCardBags = (HomeCardView) view.findViewById(R.id.cardBags);
-
-        mScrollView = (ScrollView) view.findViewById(R.id.scrollView);
-
+        mTypeGridView = (NoScrollGridView) view.findViewById(R.id.typeGridView);
+        mBrandGridView = (NoScrollGridView) view.findViewById(R.id.brandGridView);
+        mScrollView = (BounceScrollView) view.findViewById(R.id.scrollView);
+        mLikeGridView = (NoScrollGridView) view.findViewById(R.id.likeGridView);
         return view;
     }
 
@@ -63,6 +75,7 @@ public class HomeFragment extends Fragment {
         initView();
         initEvent();
         initCardData();
+        initLikeWaresData();
     }
 
     private void initCardData() {
@@ -70,8 +83,15 @@ public class HomeFragment extends Fragment {
         mHomeCardDAO.loadHomeCardInfo();
     }
 
+    private void initLikeWaresData() {
+        mWaresLimitDAO = new WaresLimitDAO(getContext());
+        mLikeGridView.setAdapter(mWaresLimitDAO.mLikeGridAdapter);
+    }
+
     private void initView() {
         mFastMenuGridView.setAdapter(new FastMenuAdapter(getContext()));
+        mTypeGridView.setAdapter(new TypeGridAdapter(getContext()));
+        mBrandGridView.setAdapter(new BrandGridAdapter(getContext()));
     }
 
 
@@ -89,6 +109,8 @@ public class HomeFragment extends Fragment {
         });
         mFastMenuGridView.setOnItemClickListener((parent, views, position, id) -> Toast.makeText(getContext(), "pos=" + position, Toast.LENGTH_SHORT).show());
 
+
+        //当card可见时setData
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
             if (setRecommendDataFlag && mCardRecommend.getGlobalVisibleRect(new Rect())) {
                 mCardRecommend.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[0]));
@@ -111,6 +133,22 @@ public class HomeFragment extends Fragment {
                 setBagsDataFlag = false;
             }
         });
+
+        mScrollView.setOnScrollTopBottomListener(new BounceScrollView.onScrollTopBottomListener() {
+            @Override
+            public void top() {
+                Log.d(TAG, "top: ");
+                mHomeCardDAO.loadHomeCardInfo();
+            }
+
+            @Override
+            public void bottom() {
+                Log.d(TAG, "bottom: ");
+                mWaresLimitDAO.loadWaresItem();
+
+            }
+        });
+
 
     }
 

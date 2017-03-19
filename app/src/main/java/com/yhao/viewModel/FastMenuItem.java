@@ -1,8 +1,13 @@
 package com.yhao.viewModel;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.yhao.view.commen.ContextHolder;
 
 /**
@@ -10,7 +15,7 @@ import com.yhao.view.commen.ContextHolder;
  * Email：756232212@qq.com
  */
 
-public class FastMenuItem {
+public class FastMenuItem extends BaseObservable{
     private int imgResId;
     private String itemText;
 
@@ -19,8 +24,9 @@ public class FastMenuItem {
         this.itemText = itemText;
     }
 
-    public Drawable getImgResId() {
-        return ContextCompat.getDrawable(ContextHolder.getContext(), imgResId);
+    @Bindable
+    public int getImgResId() {
+        return imgResId;
     }
 
     public void setImgResId(int imgResId) {
@@ -33,5 +39,13 @@ public class FastMenuItem {
 
     public void setItemText(String itemText) {
         this.itemText = itemText;
+    }
+
+
+    @BindingAdapter("app:imgUrl")
+    public static void loadImg(ImageView view, int imgResId) {
+        Glide.with(view.getContext())
+                .load(imgResId)
+                .into(view);
     }
 }

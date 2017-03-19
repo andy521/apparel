@@ -3,6 +3,7 @@ package com.yhao.viewModel;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +30,7 @@ public class WaresItem extends BaseObservable {
                 ", price=" + price +
                 '}';
     }
+
     @Bindable
     public String getName() {
         return name;
@@ -46,8 +48,10 @@ public class WaresItem extends BaseObservable {
     }
 
     public void setMainImgUrl(String mainImgUrl) {
-        this.mainImgUrl = mainImgUrl;
-        notifyPropertyChanged(BR.mainImgUrl);
+        if (!TextUtils.equals(this.mainImgUrl, mainImgUrl)) {
+            this.mainImgUrl = mainImgUrl;
+            notifyPropertyChanged(BR.mainImgUrl);
+        }
     }
 
     @BindingAdapter("app:imgUrl")

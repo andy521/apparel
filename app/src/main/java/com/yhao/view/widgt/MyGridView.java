@@ -33,7 +33,6 @@ public class MyGridView extends GridView {
         mColumnWidth = DensityUtil.dip2px(mContext, 120);
         setColumnWidth(mColumnWidth);
         setStretchMode(GridView.NO_STRETCH);
-
     }
 
 
@@ -44,6 +43,7 @@ public class MyGridView extends GridView {
         setNumColumns(mColumnNum);
         setLayoutParams(new LinearLayout.LayoutParams(mViewWidth, LinearLayout.LayoutParams.MATCH_PARENT));
         WaresItemDAO waresItemDAO = new WaresItemDAO(waresId);
+        //TODO adapter重新创建了  所以getview无法复用view   导致图片刷新
         CardGridAdapter adapter = new CardGridAdapter(mContext, waresItemDAO.mWaresItemList);
         setAdapter(adapter);
         waresItemDAO.loadWaresItem();

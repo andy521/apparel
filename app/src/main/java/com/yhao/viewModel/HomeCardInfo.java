@@ -3,6 +3,8 @@ package com.yhao.viewModel;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -50,17 +52,18 @@ public class HomeCardInfo extends BaseObservable {
     }
 
     public void setBigImgUrl(String bigImgUrl) {
-        this.bigImgUrl = bigImgUrl;
-        notifyPropertyChanged(BR.bigImgUrl);
-
+        if (!TextUtils.equals(this.bigImgUrl, bigImgUrl)) {
+            this.bigImgUrl = bigImgUrl;
+            notifyPropertyChanged(BR.bigImgUrl);
+        }
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String conten) {
-        this.content = conten;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Bindable
@@ -69,6 +72,17 @@ public class HomeCardInfo extends BaseObservable {
     }
 
     public void setWaresId(List<String> waresId) {
+        if (this.waresId!=null&&this.waresId.size() == waresId.size()) {
+            for (int i = 0; i < this.waresId.size(); i++) {
+                if (TextUtils.equals(this.waresId.get(i), waresId.get(i))) {
+                    if (i == this.waresId.size() - 1) {
+                        return;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
         this.waresId = waresId;
         notifyPropertyChanged(BR.waresId);
     }

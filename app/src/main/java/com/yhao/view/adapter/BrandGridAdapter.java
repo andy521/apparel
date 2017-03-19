@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.yhao.view.R;
-import com.yhao.view.databinding.FastMenuItemBinding;
+import com.yhao.view.databinding.BrandGridItemBinding;
+import com.yhao.view.databinding.TypeGridItemBinding;
 import com.yhao.view.databinding.WaresLikeGridItemBinding;
 import com.yhao.viewModel.FastMenuItem;
 
@@ -17,29 +18,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yinghao on 2017/3/16.
- * Email：756232212@qq.com
+ * Created by yhao on 2017/3/17.
  */
 
-public class FastMenuAdapter extends BaseAdapter {
-
-
-    private static final int[] imgResId = new int[]{R.mipmap.daynew, R.mipmap.hot, R.mipmap.discount, R.mipmap.like};
-    private static final String[] menuText = new String[]{"今日新品", "人气单品", "特价优惠", "我的收藏"};
-
+public class BrandGridAdapter extends BaseAdapter {
+    private final int[] imgsId = new int[]{R.mipmap.meterslogo, R.mipmap.asicslogo, R.mipmap.converselogo,
+            R.mipmap.nikelogo, R.mipmap.pumalogo, R.mipmap.semirlogo};
     private List<FastMenuItem> mFastMenuItemList = new ArrayList<>();
+
     private Context mContext;
 
-    public FastMenuAdapter(Context context) {
+    public BrandGridAdapter(Context context) {
         mContext = context;
-        for (int i = 0; i < imgResId.length; i++) {
-            mFastMenuItemList.add(i, new FastMenuItem(imgResId[i], menuText[i]));
+        for (int i = 0; i < imgsId.length; i++) {
+            mFastMenuItemList.add(i, new FastMenuItem(imgsId[i], null));
         }
     }
 
     @Override
     public int getCount() {
-        return mFastMenuItemList.size();
+        return imgsId.length;
     }
 
     @Override
@@ -54,9 +52,9 @@ public class FastMenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        FastMenuItemBinding binding;
+        BrandGridItemBinding binding;
         if (convertView == null) {
-            binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.fast_menu_item, null, false);
+            binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.brand_grid_item, null, false);
         } else {
             binding = DataBindingUtil.getBinding(convertView);
         }

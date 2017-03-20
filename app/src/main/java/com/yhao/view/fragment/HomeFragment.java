@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initCardData() {
-        mHomeCardDAO = new HomeCardDAO();
+        mHomeCardDAO = new HomeCardDAO(mScrollView);
         mHomeCardDAO.loadHomeCardInfo();
     }
 

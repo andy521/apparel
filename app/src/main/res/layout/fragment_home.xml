@@ -37,12 +37,13 @@
             <TextView
                 android:id="@+id/topTipTv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/colorDotCurrent"
+                android:layout_height="50dp"
+                android:gravity="center_horizontal|bottom"
                 android:text="下拉刷新页面"
-                android:visibility="gone"
-                android:textSize="12sp"/>
+                android:paddingBottom="3dp"
+                android:textColor="@color/colorDotCurrent"
+                android:textSize="12sp"
+                />
 
             <com.yhao.view.widgt.LoopViewPager
                 android:layout_width="match_parent"
@@ -148,9 +149,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                android:layout_marginTop="8dp"
                 >
 
                 <TextView
@@ -167,22 +168,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:numColumns="2"
-                    android:verticalSpacing="30dp"
-                    android:padding="10dp"
                     android:horizontalSpacing="10dp"
                     android:listSelector="@null"
+                    android:numColumns="2"
+                    android:padding="10dp"
                     android:stretchMode="columnWidth"
+                    android:verticalSpacing="30dp"
                     />
+
                 <TextView
                     android:id="@+id/loadMoreTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBack"
-                    android:gravity="center"
-                    android:textSize="12sp"
                     android:layout_marginBottom="7dp"
-                   />
+                    android:gravity="center"
+                    android:textColor="@color/colorBack"
+                    android:textSize="12sp"
+                    />
 
 
             </LinearLayout>

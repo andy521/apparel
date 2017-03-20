@@ -53,6 +53,7 @@ public class WaresLimitDAO {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(waresItemInfo -> {
+                        Thread.sleep(1000);
                         if (waresItemInfo.getResults().size() == 0) {
                             loadFlag = false;
                             mTextView.setText("没有更多了~");

@@ -25,6 +25,8 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
         android:scrollbars="none">
 
 
@@ -38,10 +40,11 @@
                 android:id="@+id/topTipTv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:gravity="center_horizontal|bottom"
-                android:text="下拉刷新页面"
+                android:background="@color/colorWhite"
+                android:gravity="center"
                 android:paddingBottom="3dp"
-                android:textColor="@color/colorDotCurrent"
+                android:text="下拉刷新页面"
+                android:textColor="@color/colorBack"
                 android:textSize="12sp"
                 />
 

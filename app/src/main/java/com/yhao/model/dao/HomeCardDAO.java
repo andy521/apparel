@@ -35,7 +35,7 @@ public class HomeCardDAO {
     }
 
     public void loadHomeCardInfo() {
-        mScrollView.setTopText("加载中...");
+        mScrollView.setTopText("正在刷新页面");
         HomeCardAPI homeCardAPI = RetrofitUtil.getRetrofit().create(HomeCardAPI.class);
         homeCardAPI.getCardViewInfo()
                 .subscribeOn(Schedulers.io())
@@ -48,7 +48,7 @@ public class HomeCardDAO {
                     }
                 })
                 .subscribe(homeCardInfo -> {
-                    mScrollView.setTopText("继续上滑可刷新...");
+                    mScrollView.setTopText("下拉刷新页面");
                     mScrollView.hideTop();
                     mHomeCardInfoMap.get(homeCardInfo.getTheme()).setWaresId(homeCardInfo.getWaresId());
                     mHomeCardInfoMap.get(homeCardInfo.getTheme()).setBigImgUrl(homeCardInfo.getBigImgUrl());

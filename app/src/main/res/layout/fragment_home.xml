@@ -18,7 +18,7 @@
         app:rightImg="@mipmap/search"
         app:title="首页"
         app:titleTextColor="@color/colorDotCurrent"
-        app:titleTextSize="8sp"
+        app:titleTextSize="5sp"
         />
 
     <com.yhao.view.widgt.BounceScrollView

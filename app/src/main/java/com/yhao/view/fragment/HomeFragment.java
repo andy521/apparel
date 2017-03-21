@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment {
         mScrollView = (BounceScrollView) view.findViewById(R.id.scrollView);
         mLikeGridView = (NoScrollGridView) view.findViewById(R.id.likeGridView);
         mLoadMoreTv = (TextView) view.findViewById(R.id.loadMoreTv);
-
         return view;
     }
 

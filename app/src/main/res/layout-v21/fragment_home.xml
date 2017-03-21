@@ -1,21 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/colorWhite"
-              android:orientation="vertical">
+              android:background="@color/colorBack"
+              android:orientation="vertical"
+    >
 
     <com.yhao.view.widgt.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
+        android:background="@color/colorWhite"
         app:leftImg="@mipmap/more"
         app:rightImg="@mipmap/search"
         app:title="首页"
-        app:titleTextColor="#515151"
-        app:titleTextSize="8sp"
+        app:titleTextColor="@color/colorDotCurrent"
+        app:titleTextSize="5sp"
         />
 
+    <com.yhao.view.widgt.BounceScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/topTipTv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorWhite"
+                android:gravity="center"
+                android:paddingBottom="3dp"
+                android:text="下拉刷新页面"
+                android:textColor="@color/colorBack"
+                android:textSize="12sp"
+                />
+
+            <com.yhao.view.widgt.LoopViewPager
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                />
+
+            <GridView
+                android:id="@+id/fastMenuGridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:numColumns="4"
+                android:padding="10dp"
+                />
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardRecommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="热门分类"
+                    android:textColor="@color/colorDotCurrent"
+                    android:textSize="12sp"/>
+
+                <com.yhao.view.widgt.NoScrollGridView
+                    android:id="@+id/typeGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:numColumns="3"
+                    android:padding="15dp"
+                    android:verticalSpacing="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="热门品牌"
+                    android:textColor="@color/colorDotCurrent"
+                    android:textSize="12sp"/>
+
+                <com.yhao.view.widgt.NoScrollGridView
+                    android:id="@+id/brandGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:numColumns="3"
+                    android:padding="15dp"
+                    android:verticalSpacing="15dp"
+                    />
+
+            </LinearLayout>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardTops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardBottoms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardShose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
+            <com.yhao.view.widgt.HomeCardView
+                android:id="@+id/cardBags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="猜你喜欢"
+                    android:textColor="@color/colorDotCurrent"
+                    android:textSize="12sp"/>
+
+                <com.yhao.view.widgt.NoScrollGridView
+                    android:id="@+id/likeGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="@null"
+                    android:numColumns="2"
+                    android:padding="10dp"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="30dp"
+                    />
+
+                <TextView
+                    android:id="@+id/loadMoreTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBack"
+                    android:textSize="12sp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.yhao.view.widgt.BounceScrollView>
 </LinearLayout>

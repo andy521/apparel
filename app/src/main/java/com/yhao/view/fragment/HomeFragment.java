@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +33,11 @@ public class HomeFragment extends Fragment {
     private HomeCardView mCardShose;
     private HomeCardView mCardBags;
 
-    private boolean setRecommendDataFlag = true;
-    private boolean setTopsDataFlag = true;
-    private boolean setBottomsDataFlag = true;
-    private boolean setShoseDataFlag = true;
-    private boolean setBagsDataFlag = true;
+    private boolean setRecommendDataFlag = false;
+    private boolean setTopsDataFlag = false;
+    private boolean setBottomsDataFlag = false;
+    private boolean setShoseDataFlag = false;
+    private boolean setBagsDataFlag = false;
 
     private BounceScrollView mScrollView;
 
@@ -111,26 +112,7 @@ public class HomeFragment extends Fragment {
 
         //当card可见时setData
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-            if (setRecommendDataFlag && mCardRecommend.getGlobalVisibleRect(new Rect())) {
-                mCardRecommend.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[0]));
-                setRecommendDataFlag = false;
-            }
-            if (setTopsDataFlag && mCardTops.getGlobalVisibleRect(new Rect())) {
-                mCardTops.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[1]));
-                setTopsDataFlag = false;
-            }
-            if (setBottomsDataFlag && mCardBottoms.getGlobalVisibleRect(new Rect())) {
-                mCardBottoms.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[2]));
-                setBottomsDataFlag = false;
-            }
-            if (setShoseDataFlag && mCardShose.getGlobalVisibleRect(new Rect())) {
-                mCardShose.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[3]));
-                setShoseDataFlag = false;
-            }
-            if (setBagsDataFlag && mCardBags.getGlobalVisibleRect(new Rect())) {
-                mCardBags.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[4]));
-                setBagsDataFlag = false;
-            }
+
         });
 
         mScrollView.setOnScrollTopBottomListener(new BounceScrollView.onScrollTopBottomListener() {
@@ -145,6 +127,32 @@ public class HomeFragment extends Fragment {
                 Logger.d("bottom ");
                 mWaresLimitDAO.loadWaresItem();
 
+            }
+        });
+
+        mScrollView.setOnScrollStopListener(() -> {
+            if (!setRecommendDataFlag && mCardRecommend.getGlobalVisibleRect(new Rect())) {
+                mCardRecommend.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[0]));
+                setRecommendDataFlag = true;
+            }
+            if (!setTopsDataFlag && mCardTops.getGlobalVisibleRect(new Rect())) {
+                mCardTops.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[1]));
+                setTopsDataFlag = true;
+            }
+            if (!setBottomsDataFlag && mCardBottoms.getGlobalVisibleRect(new Rect())) {
+                mCardBottoms.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[2]));
+                setBottomsDataFlag = true;
+            }
+            if (!setShoseDataFlag && mCardShose.getGlobalVisibleRect(new Rect())) {
+                mCardShose.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[3]));
+                setShoseDataFlag = true;
+            }
+            if (!setBagsDataFlag && mCardBags.getGlobalVisibleRect(new Rect())) {
+                mCardBags.setData(mHomeCardDAO.mHomeCardInfoMap.get(HomeCardDAO.themes[4]));
+                setBagsDataFlag = true;
+            }
+            if (setRecommendDataFlag && setTopsDataFlag && setBottomsDataFlag && setShoseDataFlag && setBagsDataFlag) {
+                mScrollView.removeOnScrollStopListener();
             }
         });
 

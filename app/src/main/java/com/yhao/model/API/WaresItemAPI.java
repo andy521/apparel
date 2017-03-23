@@ -15,6 +15,4 @@ import retrofit2.http.Query;
 public interface WaresItemAPI {
     @GET("classes/Wares/{objectId}")
     Flowable<WaresItem> getWares(@Path("objectId") String objectId);
-
-
 }

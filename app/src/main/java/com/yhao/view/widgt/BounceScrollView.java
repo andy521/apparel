@@ -32,6 +32,7 @@ public class BounceScrollView extends ScrollView {
     private float lastMoveY;
     private boolean filingHideTopFlag = true;
     private boolean oldClampedY;
+    private boolean isTouching = false;
 
 
     public BounceScrollView(Context context, AttributeSet attrs) {
@@ -49,6 +50,7 @@ public class BounceScrollView extends ScrollView {
         }
         mHeader = (TextView) inner.findViewById(R.id.topTipTv);
         mHeaderHeight = DensityUtil.dip2px(getContext(), 50);
+        new Thread(new RunnableIsStop()).start();
     }
 
     public void setTopText(String text) {
@@ -94,6 +96,8 @@ public class BounceScrollView extends ScrollView {
                 break;
         }
     }
+
+
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         //当惯性上滑topText可见时自动滑回
@@ -116,14 +120,30 @@ public class BounceScrollView extends ScrollView {
     public void setOnScrollTopBottomListener(onScrollTopBottomListener onScrollTopBottomListener) {
         mOnScrollTopBottomListener = onScrollTopBottomListener;
     }
+    public void setOnScrollStopListener(onScrollStopListener onScrollStopListener) {
+        mOnScrollStopListener = onScrollStopListener;
+    }
+
+    public void removeOnScrollStopListener() {
+        listenerStopFlag = true;
+        mOnScrollStopListener = null;
+    }
 
     private onScrollTopBottomListener mOnScrollTopBottomListener;
+    private onScrollStopListener mOnScrollStopListener;
 
     public interface onScrollTopBottomListener {
         void top();
 
         void bottom();
+
     }
+    public interface onScrollStopListener {
+
+
+        void stop();
+    }
+
 
     private void clear0() {
         lastX = 0;
@@ -134,14 +154,13 @@ public class BounceScrollView extends ScrollView {
     }
 
 
-
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         float currentX = ev.getX();
         float currentY = ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                isTouching = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 distanceX = currentX - lastX;
@@ -151,6 +170,7 @@ public class BounceScrollView extends ScrollView {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                isTouching = false;
                 break;
             default:
                 break;
@@ -159,5 +179,28 @@ public class BounceScrollView extends ScrollView {
         lastY = currentY;
         if (upDownSlide && inner != null) commOnTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
+    }
+
+
+    int nowY, preY;
+    boolean listenerStopFlag = true;
+
+    public class RunnableIsStop implements Runnable {
+        @Override
+        public void run() {
+            try {
+                while (listenerStopFlag) {
+                    nowY = getScrollY();
+                    if (nowY == preY && !isTouching && mOnScrollStopListener != null) {
+                        //此时滚动停止且手指未触摸
+                        mOnScrollStopListener.stop();
+                    }
+                    preY = nowY;
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

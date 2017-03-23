@@ -17,8 +17,8 @@ public class BaseApplication extends Application {
         ContextHolder.initial(this);
         RetrofitUtil.initRetrofit();
         Logger.init("apparel")                 // default PRETTYLOGGER or use just init()
-                .methodCount(3);               // default 2
-//                .hideThreadInfo()               // default shown
+                .methodCount(0)               // default 2
+                .hideThreadInfo();          // default shown
 //                .logLevel(LogLevel.NONE)        // default LogLevel.FULL
 //                .methodOffset(2)                // default 0
 //                .logAdapter(new AndroidLogAdapter()); //default AndroidLogAdapter

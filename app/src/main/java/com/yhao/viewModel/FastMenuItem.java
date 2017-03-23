@@ -43,7 +43,7 @@ public class FastMenuItem extends BaseObservable{
 
 
     @BindingAdapter("app:imgUrl")
-    public static void loadImg(ImageView view, int imgResId) {
+    public static void  loadImg(ImageView view, int imgResId) {
         Glide.with(view.getContext())
                 .load(imgResId)
                 .into(view);

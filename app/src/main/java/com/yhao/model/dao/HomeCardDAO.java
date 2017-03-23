@@ -1,5 +1,6 @@
 package com.yhao.model.dao;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HomeCardAPI;
 import com.yhao.model.bean.CardViewInfo;
 import com.yhao.model.util.RetrofitUtil;
@@ -7,13 +8,19 @@ import com.yhao.view.widgt.BounceScrollView;
 import com.yhao.viewModel.HomeCardInfo;
 
 import org.reactivestreams.Publisher;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.internal.fuseable.ConditionalSubscriber;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -54,7 +61,6 @@ public class HomeCardDAO {
                     mHomeCardInfoMap.get(homeCardInfo.getTheme()).setBigImgUrl(homeCardInfo.getBigImgUrl());
                     mHomeCardInfoMap.get(homeCardInfo.getTheme()).setContent(homeCardInfo.getContent());
                     mHomeCardInfoMap.get(homeCardInfo.getTheme()).setTheme(homeCardInfo.getTheme());
-                });
-
+                }, throwable -> Logger.e(throwable.getMessage()));
     }
 }

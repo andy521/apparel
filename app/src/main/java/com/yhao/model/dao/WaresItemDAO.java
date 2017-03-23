@@ -1,5 +1,6 @@
 package com.yhao.model.dao;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.model.API.WaresItemAPI;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.viewModel.WaresItem;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -41,7 +43,7 @@ public class WaresItemDAO {
                         mWaresItemList.get(finalI).setMainImgUrl(waresItem.getMainImgUrl());
                         mWaresItemList.get(finalI).setPrice("￥" + waresItem.getPrice());
                         mWaresItemList.get(finalI).setBuyUrl(waresItem.getBuyUrl());
-                    });
+                    }, throwable -> Logger.e(throwable.getMessage()));
         }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.model.API.WaresItemAPI;
 import com.yhao.model.API.WaresLimitAPI;
 import com.yhao.model.bean.WaresItemInfo;
@@ -66,7 +67,7 @@ public class WaresLimitDAO {
                         //需要在ui线程
                         mTextView.setText("");
                         mLikeGridAdapter.notifyDataSetChanged();
-                    });
+                    }, throwable -> Logger.e(throwable.getMessage()));
             skip += limit;
         }
     }

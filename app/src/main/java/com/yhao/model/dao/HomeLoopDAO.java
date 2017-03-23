@@ -1,5 +1,6 @@
 package com.yhao.model.dao;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HomeLoopAPI;
 import com.yhao.model.bean.LoopViewInfo;
 import com.yhao.model.util.RetrofitUtil;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -57,7 +59,7 @@ public class HomeLoopDAO {
                         mCurrentLoopViewItem.setIndex(item.getIndex());
                         mCurrentLoopViewItem.setInfo(item.getInfo());
                     }
-                });
+                }, throwable -> Logger.e(throwable.getMessage()));
 
 
     }

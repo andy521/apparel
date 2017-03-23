@@ -4,7 +4,6 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +29,7 @@ public class HomeCardInfo extends BaseObservable {
 
     @Override
     public String toString() {
-        return "CardViewInfo{" +
+        return "HomeCardData{" +
                 "theme='" + theme + '\'' +
                 ", bigImgUrl='" + bigImgUrl + '\'' +
                 ", conten='" + content + '\'' +

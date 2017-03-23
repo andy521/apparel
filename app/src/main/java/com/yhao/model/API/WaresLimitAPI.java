@@ -1,6 +1,6 @@
 package com.yhao.model.API;
 
-import com.yhao.model.bean.WaresItemInfo;
+import com.yhao.model.data.WaresItemInfo;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;

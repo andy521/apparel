@@ -1,46 +1,51 @@
 package com.yhao.model.dao;
 
+import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.view.LayoutInflater;
+
+import com.google.android.flexbox.FlexboxLayout;
 import com.orhanobut.logger.Logger;
-import com.yhao.model.API.HomeLoopAPI;
 import com.yhao.model.API.HotSearchAPI;
-import com.yhao.model.bean.HotSearchInfo;
-import com.yhao.model.bean.LoopViewInfo;
+import com.yhao.model.data.HotSearchInfo;
 import com.yhao.model.util.RetrofitUtil;
+import com.yhao.view.R;
+import com.yhao.view.databinding.HotSearchTextViewBinding;
 import com.yhao.viewModel.HotSearchType;
-import com.yhao.viewModel.LoopViewItem;
 
 import org.reactivestreams.Publisher;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by yinghao on 2017/3/15.
  * Email：756232212@qq.com
- *
  */
 
 public class HotSearchDAO {
-    public List<HotSearchType> mHotSearchTypeList;
+    private FlexboxLayout mFlexboxLayout;
+    private Context mContext;
+    private Map<String,HotSearchType> mData;
 
 
-    public HotSearchDAO(int size) {
-        mHotSearchTypeList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            HotSearchType item = new HotSearchType();
-            mHotSearchTypeList.add(item);
-        }
+    public HotSearchDAO(Context context, FlexboxLayout flexboxLayout) {
+        mContext = context;
+        mFlexboxLayout = flexboxLayout;
+        mData = new HashMap<>();
     }
 
-    public void loadHotSearchInfo() {
+    //TODO 缺陷： 当数据数量改变时无法更新
+    public void loadData(final boolean bind) {
         HotSearchAPI homeLoopAPI = RetrofitUtil.getRetrofit().create(HotSearchAPI.class);
         homeLoopAPI.getHotSearch()
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(new Function<HotSearchInfo, Publisher<HotSearchType>>() {
                     @Override
                     public Publisher<HotSearchType> apply(HotSearchInfo loopViewInfo) throws Exception {
@@ -49,12 +54,16 @@ public class HotSearchDAO {
                     }
                 })
                 .subscribe(item -> {
-                    int index = item.getIndex();
-                    mHotSearchTypeList.get(index).setHotType(item.getHotType());
-                    mHotSearchTypeList.get(index).setIndex(item.getIndex());
-                    mHotSearchTypeList.get(index).setRed(item.isRed());
+                    if (!bind) {
+                        mData.get(item.getObjectId()).setHotType(item.getHotType());
+                        mData.get(item.getObjectId()).setIndex(item.getIndex());
+                        mData.get(item.getObjectId()).setRed(item.getIsRed());
+                        return;
+                    }
+                    mData.put(item.getObjectId(), item);
+                    HotSearchTextViewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.hot_search_text_view, null, false);
+                    binding.setHotSearchType(item);
+                    mFlexboxLayout.addView(binding.getRoot());
                 }, throwable -> Logger.e(throwable.getMessage()));
-
-
     }
 }

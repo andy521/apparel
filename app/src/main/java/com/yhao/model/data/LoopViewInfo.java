@@ -1,4 +1,4 @@
-package com.yhao.model.bean;
+package com.yhao.model.data;
 
 import com.yhao.viewModel.LoopViewItem;
 

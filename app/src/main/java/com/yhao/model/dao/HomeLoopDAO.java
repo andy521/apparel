@@ -2,7 +2,7 @@ package com.yhao.model.dao;
 
 import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HomeLoopAPI;
-import com.yhao.model.bean.LoopViewInfo;
+import com.yhao.model.data.LoopViewInfo;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.viewModel.LoopViewItem;
 
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 

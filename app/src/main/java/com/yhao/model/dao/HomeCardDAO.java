@@ -2,25 +2,19 @@ package com.yhao.model.dao;
 
 import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HomeCardAPI;
-import com.yhao.model.bean.CardViewInfo;
+import com.yhao.model.data.HomeCardData;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.view.widgt.BounceScrollView;
 import com.yhao.viewModel.HomeCardInfo;
 
 import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.internal.fuseable.ConditionalSubscriber;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -47,9 +41,9 @@ public class HomeCardDAO {
         homeCardAPI.getCardViewInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Function<CardViewInfo, Publisher<HomeCardInfo>>() {
+                .flatMap(new Function<HomeCardData, Publisher<HomeCardInfo>>() {
                     @Override
-                    public Publisher<HomeCardInfo> apply(CardViewInfo loopViewInfo) throws Exception {
+                    public Publisher<HomeCardInfo> apply(HomeCardData loopViewInfo) throws Exception {
                         Thread.sleep(1000);
                         return Flowable.fromIterable(loopViewInfo.getResults());
                     }

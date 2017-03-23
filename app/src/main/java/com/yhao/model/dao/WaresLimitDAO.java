@@ -1,13 +1,10 @@
 package com.yhao.model.dao;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.yhao.model.API.WaresItemAPI;
 import com.yhao.model.API.WaresLimitAPI;
-import com.yhao.model.bean.WaresItemInfo;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.view.adapter.LikeGridAdapter;
 import com.yhao.viewModel.WaresItem;
@@ -16,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**

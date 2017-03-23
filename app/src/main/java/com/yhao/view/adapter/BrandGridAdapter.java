@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 
 import com.yhao.view.R;
 import com.yhao.view.databinding.BrandGridItemBinding;
-import com.yhao.view.databinding.TypeGridItemBinding;
-import com.yhao.view.databinding.WaresLikeGridItemBinding;
 import com.yhao.viewModel.FastMenuItem;
 
 import java.util.ArrayList;
@@ -19,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by yhao on 2017/3/17.
+ *
  */
 
 public class BrandGridAdapter extends BaseAdapter {

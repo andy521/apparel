@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 
 /**
  * Created by yinghao on 2017/3/17.
@@ -15,8 +14,6 @@ import android.widget.ScrollView;
  */
 
 public class BounceHorizontalScrollView extends HorizontalScrollView {
-
-    private static final String TAG = "BounceScrollView";
 
     private View inner;// 子View
 
@@ -27,8 +24,6 @@ public class BounceHorizontalScrollView extends HorizontalScrollView {
     private boolean isCount = false;// 是否开始计算
     private float lastX = 0;
     private float lastY = 0;
-    private float currentX = 0;
-    private float currentY = 0;
     private float distanceX = 0;
     private float distanceY = 0;
     private boolean upDownSlide = false; //判断上下滑动的flag
@@ -45,15 +40,14 @@ public class BounceHorizontalScrollView extends HorizontalScrollView {
     protected void onFinishInflate() {
         if (getChildCount() > 0) {
             inner = getChildAt(0);
-            View view;
         }
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-        currentX = ev.getX();
-        currentY = ev.getY();
+        float currentX = ev.getX();
+        float currentY = ev.getY();
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
 

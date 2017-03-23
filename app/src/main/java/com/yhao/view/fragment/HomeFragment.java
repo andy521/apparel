@@ -3,23 +3,19 @@ package com.yhao.view.fragment;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.GridView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.model.dao.HomeCardDAO;
 import com.yhao.model.dao.WaresLimitDAO;
 import com.yhao.view.R;
 import com.yhao.view.adapter.BrandGridAdapter;
 import com.yhao.view.adapter.FastMenuAdapter;
-import com.yhao.view.adapter.LikeGridAdapter;
 import com.yhao.view.adapter.TypeGridAdapter;
 import com.yhao.view.widgt.BounceScrollView;
 import com.yhao.view.widgt.HomeCardView;
@@ -27,7 +23,6 @@ import com.yhao.view.widgt.NoScrollGridView;
 import com.yhao.view.widgt.Topbar;
 
 public class HomeFragment extends Fragment {
-    private static final String TAG = "TAG";
     private Topbar mTopbar;
     private GridView mFastMenuGridView;
 
@@ -53,7 +48,6 @@ public class HomeFragment extends Fragment {
     private NoScrollGridView mLikeGridView;
 
     private TextView mLoadMoreTv;
-
 
 
     @Override
@@ -89,7 +83,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initLikeWaresData() {
-        mWaresLimitDAO = new WaresLimitDAO(getContext(),mLoadMoreTv);
+        mWaresLimitDAO = new WaresLimitDAO(getContext(), mLoadMoreTv);
         mLikeGridView.setAdapter(mWaresLimitDAO.mLikeGridAdapter);
     }
 
@@ -142,13 +136,13 @@ public class HomeFragment extends Fragment {
         mScrollView.setOnScrollTopBottomListener(new BounceScrollView.onScrollTopBottomListener() {
             @Override
             public void top() {
-                Log.d(TAG, "top: ");
+                Logger.d("top ");
                 mHomeCardDAO.loadHomeCardInfo();
             }
 
             @Override
             public void bottom() {
-                Log.d(TAG, "bottom: ");
+                Logger.d("bottom ");
                 mWaresLimitDAO.loadWaresItem();
 
             }

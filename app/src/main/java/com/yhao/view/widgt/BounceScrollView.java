@@ -1,7 +1,6 @@
 package com.yhao.view.widgt;
 
 import android.content.Context;
-import android.database.Observable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.yhao.view.R;
 
 public class BounceScrollView extends ScrollView {
 
-    private static final String TAG = "BounceScrollView";
 
     private View inner;// 子View
 

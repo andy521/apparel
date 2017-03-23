@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 
 import com.yhao.view.R;
 import com.yhao.view.databinding.FastMenuItemBinding;
-import com.yhao.view.databinding.WaresLikeGridItemBinding;
 import com.yhao.viewModel.FastMenuItem;
 
 import java.util.ArrayList;

@@ -14,10 +14,7 @@ import com.yhao.viewModel.HomeCardInfo;
 /**
  * Created by yinghao on 2017/3/16.
  * Email：756232212@qq.com
- * <p>
- * //TODO  今日推荐  上装  下装  鞋履  包装配饰    5种数据源
- * <p>
- * 可通过自定义属性区分这五种
+ * 可通过自定义属性区分这五种 今日推荐  上装  下装  鞋履  包装配饰
  */
 
 public class HomeCardView extends LinearLayout {

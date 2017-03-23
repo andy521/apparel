@@ -2,20 +2,13 @@ package com.yhao.view.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.yhao.model.dao.WaresItemDAO;
 import com.yhao.view.R;
-import com.yhao.view.databinding.FastMenuItemBinding;
 import com.yhao.view.databinding.WaresGridItemBinding;
-import com.yhao.view.databinding.WaresLikeGridItemBinding;
-import com.yhao.viewModel.HomeCardInfo;
 import com.yhao.viewModel.WaresItem;
 
 import java.util.List;

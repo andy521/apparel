@@ -18,24 +18,12 @@ import com.yhao.view.R;
 
 public class Topbar extends RelativeLayout {
 
-    private ImageView mLeftImageView;
-    private ImageView mRightImageView;
-    private TextView mTitleTextView;
-
-    private Drawable mLeftDrawable;
-    private Drawable mRightDrawable;
-    private String mTitleText;
-    private float mTitleTextSize;
-    private int mTitleTextColor;
-
-    private LayoutParams leftLayoutParams, titleLayoutParams, rightLayoutParams;
-
     private TopBarClickListener mListener;
 
     public interface TopBarClickListener {
-        public void leftClick();
+        void leftClick();
 
-        public void rightClick();
+        void rightClick();
     }
 
     public void setTopBarClickListener(TopBarClickListener listener) {
@@ -49,36 +37,36 @@ public class Topbar extends RelativeLayout {
     public Topbar(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TopBar);
-        mLeftDrawable = ta.getDrawable(R.styleable.TopBar_leftImg);
-        mRightDrawable = ta.getDrawable(R.styleable.TopBar_rightImg);
-        mTitleText = ta.getString(R.styleable.TopBar_title);
-        mTitleTextSize = ta.getDimension(R.styleable.TopBar_titleTextSize, 0);
-        mTitleTextColor = ta.getColor(R.styleable.TopBar_titleTextColor, 0);
+        Drawable leftDrawable = ta.getDrawable(R.styleable.TopBar_leftImg);
+        Drawable rightDrawable = ta.getDrawable(R.styleable.TopBar_rightImg);
+        String titleText = ta.getString(R.styleable.TopBar_title);
+        float titleTextSize = ta.getDimension(R.styleable.TopBar_titleTextSize, 0);
+        int titleTextColor = ta.getColor(R.styleable.TopBar_titleTextColor, 0);
         ta.recycle();
 
-        mLeftImageView = new ImageView(context);
-        mRightImageView = new ImageView(context);
-        mTitleTextView = new TextView(context);
+        ImageView leftImageView = new ImageView(context);
+        ImageView rightImageView = new ImageView(context);
+        TextView titleTextView = new TextView(context);
 
-        mLeftImageView.setImageDrawable(mLeftDrawable);
-        mRightImageView.setImageDrawable(mRightDrawable);
-        mTitleTextView.setText(mTitleText);
-        mTitleTextView.setTextColor(mTitleTextColor);
-        mTitleTextView.setTextSize(mTitleTextSize);
-        mTitleTextView.setGravity(Gravity.CENTER);
+        leftImageView.setImageDrawable(leftDrawable);
+        rightImageView.setImageDrawable(rightDrawable);
+        titleTextView.setText(titleText);
+        titleTextView.setTextColor(titleTextColor);
+        titleTextView.setTextSize(titleTextSize);
+        titleTextView.setGravity(Gravity.CENTER);
 
-        leftLayoutParams=new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-        leftLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT,TRUE);
-        addView(mLeftImageView,leftLayoutParams);
-        rightLayoutParams=new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-        rightLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,TRUE);
-        addView(mRightImageView,rightLayoutParams);
-        titleLayoutParams=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
-        titleLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT,TRUE);
-        addView(mTitleTextView,titleLayoutParams);
+        LayoutParams leftLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        leftLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, TRUE);
+        addView(leftImageView, leftLayoutParams);
+        LayoutParams rightLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        rightLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, TRUE);
+        addView(rightImageView, rightLayoutParams);
+        LayoutParams titleLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        titleLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
+        addView(titleTextView, titleLayoutParams);
 
-        mLeftImageView.setOnClickListener(view -> mListener.leftClick());
-        mRightImageView.setOnClickListener(view -> mListener.rightClick());
+        leftImageView.setOnClickListener(view -> mListener.leftClick());
+        rightImageView.setOnClickListener(view -> mListener.rightClick());
     }
 
 }

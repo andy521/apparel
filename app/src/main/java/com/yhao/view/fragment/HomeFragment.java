@@ -1,5 +1,6 @@
 package com.yhao.view.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.orhanobut.logger.Logger;
 import com.yhao.model.dao.HomeCardDAO;
 import com.yhao.model.dao.WaresLimitDAO;
 import com.yhao.view.R;
+import com.yhao.view.SearchActivity;
 import com.yhao.view.adapter.BrandGridAdapter;
 import com.yhao.view.adapter.FastMenuAdapter;
 import com.yhao.view.adapter.TypeGridAdapter;
@@ -104,7 +106,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void rightClick() {
-                Toast.makeText(getContext(), "search", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
             }
         });
         mFastMenuGridView.setOnItemClickListener((parent, views, position, id) -> Toast.makeText(getContext(), "pos=" + position, Toast.LENGTH_SHORT).show());

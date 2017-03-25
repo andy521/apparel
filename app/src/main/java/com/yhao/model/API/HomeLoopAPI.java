@@ -1,6 +1,6 @@
 package com.yhao.model.API;
 
-import com.yhao.model.data.LoopViewInfo;
+import com.yhao.model.data.LoopViewData;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -12,6 +12,6 @@ import retrofit2.http.GET;
 
 public interface HomeLoopAPI {
     @GET("classes/HomeLoopInfo")
-    Flowable<LoopViewInfo> getLoopViewInfo();
+    Flowable<LoopViewData> getLoopViewInfo();
 
 }

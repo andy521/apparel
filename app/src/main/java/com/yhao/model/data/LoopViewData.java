@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yhao on 2017/3/15.
  */
 
-public class LoopViewInfo {
+public class LoopViewData {
     private List<LoopViewItem> results;
 
     public List<LoopViewItem> getResults() {

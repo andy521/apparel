@@ -18,7 +18,7 @@ import com.yhao.view.commen.ContextHolder;
  * Email：yhaowa@outlook.com
  */
 
-public class HotSearchType extends BaseObservable {
+public class HotSearchTypeVM extends BaseObservable {
     private String objectId;
     private String hotType;
     private int index;
@@ -63,7 +63,7 @@ public class HotSearchType extends BaseObservable {
 
     @Override
     public String toString() {
-        return "HotSearchType{" +
+        return "HotSearchTypeVM{" +
                 "hotType='" + hotType + '\'' +
                 ", index=" + index +
                 ", isRed=" + isRed +

@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import com.google.android.flexbox.FlexboxLayout;
 import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HotSearchAPI;
-import com.yhao.model.data.HotSearchInfo;
+import com.yhao.model.data.HotSearchData;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.view.R;
 import com.yhao.view.databinding.HotSearchTextViewBinding;
-import com.yhao.viewModel.HotSearchType;
+import com.yhao.viewModel.HotSearchTypeVM;
 
 import org.reactivestreams.Publisher;
 
@@ -31,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 public class HotSearchDAO {
     private FlexboxLayout mFlexboxLayout;
     private Context mContext;
-    private Map<String,HotSearchType> mData;
+    private Map<String,HotSearchTypeVM> mData;
 
 
     public HotSearchDAO(Context context, FlexboxLayout flexboxLayout) {
@@ -46,9 +46,9 @@ public class HotSearchDAO {
         homeLoopAPI.getHotSearch()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Function<HotSearchInfo, Publisher<HotSearchType>>() {
+                .flatMap(new Function<HotSearchData, Publisher<HotSearchTypeVM>>() {
                     @Override
-                    public Publisher<HotSearchType> apply(HotSearchInfo loopViewInfo) throws Exception {
+                    public Publisher<HotSearchTypeVM> apply(HotSearchData loopViewInfo) throws Exception {
                         Logger.d(loopViewInfo.getResults());
                         return Flowable.fromIterable(loopViewInfo.getResults());
                     }

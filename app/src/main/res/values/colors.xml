@@ -8,6 +8,7 @@
     <color name="colorDotCurrent">#d62d2d2d</color>
     <color name="colorSpinner">#6c6c6c</color>
     <color name="colorHint">#969696</color>
+    <color name="colorDivider">#d7d7d7</color>
     <color name="colorDot">#d6ffffff</color>
     <color name="colorBack">#dbdbdb</color>
     <color name="colorBlack">#0a0a0a</color>

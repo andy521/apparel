@@ -1,6 +1,6 @@
 package com.yhao.model.API;
 
-import com.yhao.model.data.WaresItemInfo;
+import com.yhao.model.data.WaresItemData;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface WaresLimitAPI {
     @GET("classes/Wares")
-    Flowable<WaresItemInfo> getWares(@Query("limit") int limit, @Query("skip") int skip);
+    Flowable<WaresItemData> getWares(@Query("limit") int limit, @Query("skip") int skip);
 }

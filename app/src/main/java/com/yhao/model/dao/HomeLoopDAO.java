@@ -2,7 +2,7 @@ package com.yhao.model.dao;
 
 import com.orhanobut.logger.Logger;
 import com.yhao.model.API.HomeLoopAPI;
-import com.yhao.model.data.LoopViewInfo;
+import com.yhao.model.data.LoopViewData;
 import com.yhao.model.util.RetrofitUtil;
 import com.yhao.viewModel.LoopViewItem;
 
@@ -42,9 +42,9 @@ public class HomeLoopDAO {
         homeLoopAPI.getLoopViewInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .flatMap(new Function<LoopViewInfo, Publisher<LoopViewItem>>() {
+                .flatMap(new Function<LoopViewData, Publisher<LoopViewItem>>() {
                     @Override
-                    public Publisher<LoopViewItem> apply(LoopViewInfo loopViewInfo) throws Exception {
+                    public Publisher<LoopViewItem> apply(LoopViewData loopViewInfo) throws Exception {
                         return Flowable.fromIterable(loopViewInfo.getResults());
                     }
                 })

@@ -1,6 +1,6 @@
 package com.yhao.model.API;
 
-import com.yhao.model.data.HotSearchInfo;
+import com.yhao.model.data.HotSearchData;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -12,6 +12,6 @@ import retrofit2.http.GET;
 
 public interface HotSearchAPI {
     @GET("classes/HotSearch")
-    Flowable<HotSearchInfo> getHotSearch();
+    Flowable<HotSearchData> getHotSearch();
 
 }

@@ -46,7 +46,7 @@ public class WaresLimitDAO {
     public void loadWaresItem() {
         if (loadFlag) {
             mTextView.setText("加载中...");
-            waresLimitAPI.getWares(limit, skip)
+            waresLimitAPI.getWares(limit, skip,0,null)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(waresItemInfo -> {
@@ -66,5 +66,9 @@ public class WaresLimitDAO {
                     }, throwable -> Logger.e(throwable.getMessage()));
             skip += limit;
         }
+    }
+
+    private String buildWhere(String text) {
+        return "{\"typeWord\":" + "\"" + text + "\"" + "}";
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.orhanobut.logger.Logger;
 import com.yhao.view.R;
 import com.yhao.view.databinding.SearchTypeTextviewBinding;
 import com.yhao.view.databinding.WaresLikeGridItemBinding;
@@ -50,8 +51,10 @@ public class SearchTypeAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         SearchTypeTextviewBinding binding;
         if (convertView == null) {
+            Logger.d("convertView = null");
             binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.search_type_textview, null, false);
         } else {
+            Logger.d("convertView != null");
             binding = DataBindingUtil.getBinding(convertView);
         }
         binding.setSearchTypeVM(mSearchTypeVMList.get(position));

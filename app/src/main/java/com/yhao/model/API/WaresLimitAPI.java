@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface WaresLimitAPI {
     @GET("classes/Wares")
-    Flowable<WaresItemData> getWares(@Query("limit") int limit, @Query("skip") int skip);
+    Flowable<WaresItemData> getWares(@Query("limit") int limit, @Query("skip") int skip, @Query("order") int order, @Query("where") String text);
 }

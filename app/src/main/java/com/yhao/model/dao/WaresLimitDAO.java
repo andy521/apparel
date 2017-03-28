@@ -1,6 +1,7 @@
 package com.yhao.model.dao;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -25,7 +26,7 @@ public class WaresLimitDAO {
     public List<WaresItem> mWaresLimitList;
 
 
-    private final int limit = 4;
+    private final int limit = 6;
     private int skip = 0;
     private WaresLimitAPI waresLimitAPI;
     public LikeGridAdapter mLikeGridAdapter;
@@ -39,14 +40,17 @@ public class WaresLimitDAO {
         mWaresLimitList = new ArrayList<>();
         mLikeGridAdapter = new LikeGridAdapter(context, mWaresLimitList);
         waresLimitAPI = RetrofitUtil.getRetrofit().create(WaresLimitAPI.class);
+    }
 
+    public void clean() {
+        mWaresLimitList.clear();
     }
 
 
-    public void loadWaresItem() {
+    public void loadWaresItem(String type, String order) {
         if (loadFlag) {
             mTextView.setText("加载中...");
-            waresLimitAPI.getWares(limit, skip,0,null)
+            waresLimitAPI.getWares(limit, skip, buildWhere(type), order)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(waresItemInfo -> {
@@ -68,7 +72,7 @@ public class WaresLimitDAO {
         }
     }
 
-    private String buildWhere(String text) {
-        return "{\"typeWord\":" + "\"" + text + "\"" + "}";
+    private String buildWhere(String type) {
+        return TextUtils.isEmpty(type) ? null : "{\"word\":" + "\"" + type + "\"" + "}";
     }
 }

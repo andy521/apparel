@@ -4,19 +4,17 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-import com.yhao.view.adapter.LikeGridAdapter;
-
 /**
  * Created by yhao on 2017/3/17.
- * 兼容 scrollView
+ * 兼容 scrollView 和 viewpager
  */
 
-public class NoScrollGridView extends GridView {
-    public NoScrollGridView(Context context) {
+public class NoScrollGridView2 extends GridView {
+    public NoScrollGridView2(Context context) {
         super(context);
     }
 
-    public NoScrollGridView(Context context, AttributeSet attrs) {
+    public NoScrollGridView2(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

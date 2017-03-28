@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="gridAdapterVM"
+            type="com.yhao.viewModel.GridAdapterVM"/>
+    </data>
+
+    <com.yhao.view.widgt.NoScrollGridView2
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@null"
+        android:numColumns="2"
+        android:padding="10dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="30dp"
+        app:adapter="@{gridAdapterVM.likeGridAdapter}"
+        />
+</layout>

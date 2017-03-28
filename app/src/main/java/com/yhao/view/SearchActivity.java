@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void search(View view) {
         Intent intent = new Intent(this, SWaresActivity.class);
+        intent.putExtra("TYPE", mSearchTextVM.getInputText());
         startActivity(intent);
     }
 }

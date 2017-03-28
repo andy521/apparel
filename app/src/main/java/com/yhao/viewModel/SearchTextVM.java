@@ -1,7 +1,5 @@
 package com.yhao.viewModel;
 
-import android.text.TextUtils;
-
 import com.yhao.model.dao.SearchTypeDAO;
 
 /**

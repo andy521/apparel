@@ -1,70 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/colorWhite"
-    android:layout_height="match_parent"
-    tools:context="com.yhao.view.SWaresActivity">
-    <LinearLayout
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:paddingBottom="3dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="3dp"
-        android:paddingTop="3dp"
-        >
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <ImageView
-            android:id="@+id/backImageView"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:onClick="back"
-            />
+    <data>
+
+        <variable
+            name="searchText2VM"
+            type="com.yhao.viewModel.SearchType2VM"/>
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:context="com.yhao.view.SWaresActivity">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_search_back"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:gravity="center_vertical"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="3dp"
+            android:paddingTop="3dp"
             >
 
+            <ImageView
+                android:id="@+id/backImageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:onClick="back"
+                />
 
-
-            <EditText
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1"
-                android:background="@null"
-                android:hint="帆布鞋"
-                android:maxLines="1"
-                android:paddingLeft="5dp"
-                android:textColor="@color/colorSpinner"
-                android:textColorHint="@color/colorHint"
-                android:textCursorDrawable="@null"
-                android:textSize="12sp"
+                android:background="@drawable/round_search_back"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                >
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="帆布鞋"
+                    android:maxLines="1"
+                    android:text="@={searchText2VM.inputText}"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/colorSpinner"
+                    android:textColorHint="@color/colorHint"
+                    android:textCursorDrawable="@null"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#00000000"
+                android:text="@{searchText2VM.rightText}"
+                android:textColor="@color/colorAccent"
+                android:textSize="13sp"
                 />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_below="@+id/topbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="#00000000"
-            android:text="筛选"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp"
-            />
-    </LinearLayout>
-</RelativeLayout>
+            app:tabIndicatorHeight="1px"
+            android:padding="5dp"
+            app:tabSelectedTextColor="@color/colorBlack"
+            app:tabIndicatorColor="@color/colorBlack"
+            app:tabTextColor="@color/colorSpinner"/>
+
+
+
+        <com.yhao.view.widgt.BounceScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdge="none"
+            android:layout_below="@+id/tabLayout"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/topTipTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:paddingBottom="3dp"
+                    android:text="下拉刷新页面"
+                    android:textColor="@color/colorBack"
+                    android:textSize="12sp"
+                    />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/loadMoreTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorBack"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+        </com.yhao.view.widgt.BounceScrollView>
+    </RelativeLayout>
+</layout>

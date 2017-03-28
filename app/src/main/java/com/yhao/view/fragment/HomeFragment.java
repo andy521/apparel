@@ -128,8 +128,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void bottom() {
                 Logger.d("bottom ");
-                mWaresLimitDAO.loadWaresItem();
-
+                mWaresLimitDAO.loadWaresItem(null, null);
             }
         });
 

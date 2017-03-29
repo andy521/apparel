@@ -3,17 +3,14 @@ package com.yhao.view.adapter;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.yhao.model.dao.WaresLimitDAO;
 import com.yhao.view.R;
-import com.yhao.view.SWaresActivity;
 import com.yhao.view.databinding.GridViewPagerItemBinding;
-import com.yhao.view.databinding.LoopImageViewBinding;
+import com.yhao.view.widgt.BounceScrollView;
 import com.yhao.viewModel.GridAdapterVM;
 
 import java.util.ArrayList;
@@ -24,14 +21,20 @@ import java.util.List;
  */
 
 public class OrderPagerAdapter extends PagerAdapter {
-    List<View> viewLists;
+    private List<View> viewLists;
     private String[] tabStrs = new String[]{"流行", "热销", "上新", "价格"};
+    private List<BounceScrollView> mBounceScrollViews;
 
-    public OrderPagerAdapter(Context context,List<WaresLimitDAO> waresLimitDAOList) {
+    public OrderPagerAdapter(Context context, List<WaresLimitDAO> waresLimitDAOList,List<BounceScrollView> scrollViews) {
         viewLists = new ArrayList<>();
+        mBounceScrollViews = scrollViews;
         for (int i = 0; i < 4; i++) {
             GridViewPagerItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.grid_view_pager_item, null, false);
-            binding.setGridAdapterVM(new GridAdapterVM(waresLimitDAOList.get(i).mLikeGridAdapter));
+            WaresLimitDAO dao = new WaresLimitDAO(context, binding.loadMoreTv,binding.scrollView);
+            waresLimitDAOList.add(i, dao);
+            scrollViews.add(i, binding.scrollView);
+            binding.setGridAdapterVM(new GridAdapterVM(dao.mLikeGridAdapter));
+            binding.gridView.setAdapter(dao.mLikeGridAdapter);
             viewLists.add(i, binding.getRoot());
         }
     }

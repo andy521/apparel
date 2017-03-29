@@ -87,51 +87,13 @@
             app:tabIndicatorColor="@color/colorBlack"
             app:tabTextColor="@color/colorSpinner"/>
 
-
-
-        <com.yhao.view.widgt.BounceScrollView
-            android:id="@+id/scrollView"
+        <com.yhao.view.widgt.MyViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fadingEdge="none"
+            android:layout_height="match_parent"
             android:layout_below="@+id/tabLayout"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_marginTop="2dp"
+            />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/topTipTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/colorWhite"
-                    android:gravity="center"
-                    android:paddingBottom="3dp"
-                    android:text="下拉刷新页面"
-                    android:textColor="@color/colorBack"
-                    android:textSize="12sp"
-                    />
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    />
-
-
-                <TextView
-                    android:id="@+id/loadMoreTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="7dp"
-                    android:gravity="center"
-                    android:textColor="@color/colorBack"
-                    android:textSize="12sp"
-                    />
-            </LinearLayout>
-        </com.yhao.view.widgt.BounceScrollView>
     </RelativeLayout>
 </layout>

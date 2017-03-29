@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initLikeWaresData() {
-        mWaresLimitDAO = new WaresLimitDAO(getContext(), mLoadMoreTv);
+        mWaresLimitDAO = new WaresLimitDAO(getContext(), mLoadMoreTv,null);
         mLikeGridView.setAdapter(mWaresLimitDAO.mLikeGridAdapter);
     }
 
